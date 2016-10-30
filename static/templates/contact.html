@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>{{ title }}</h1>
+        {% if confirm_message %}
+        <p>{{ confirm_message }}</p>
+        <a class="btn btn-default" {% if user.is_authenticated %} href="{% url 'dashboard' %}" {% else %} href="{% url 'home' %}" {% endif %}> Back Home</a>
+        {% endif %}
+        {% if form %}
+        <form method="POST" action="">  {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-default">Send <span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
+        </form>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

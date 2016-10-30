@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Create Facility Admin</h1>
+
+<form action="{% url 'create-admin' %}" method="post">
+    {% csrf_token %}
+    {{ defaultForm|crispy }}
+    <h2>Facility</h2>
+    {{ facilityForm|crispy }}
+    {{ customForm|crispy }}
+    <input type="submit" value="Create" />
+</form>
+{% endblock %}

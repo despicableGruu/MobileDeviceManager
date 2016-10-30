@@ -1,0 +1,3 @@
+
+class WrongManager(Exception):
+    pass
