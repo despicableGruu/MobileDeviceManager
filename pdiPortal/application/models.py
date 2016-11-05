@@ -5,13 +5,24 @@ from device.models import DeviceModel
 
 def app_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return '{0}/{1}'.format(instance.name, instance.version)
+    return 'upload/{0}/{1}'.format(instance.name, instance.version)
+
+def platform_path(instance, filename):
+  	return 'upload/{0}'.format(instance.name)
+
+class Platform(models.Model):
+	name = models.CharField(max_length=25)
+	icon = models.ImageField(upload_to=platform_path)
 
 class Application(models.Model):
 	"""docstring for Application"""
 	name = models.CharField(max_length=50)
 	title = models.CharField(max_length=50)
-	operatingSystem = models.CharField(max_length=40,default='Android')
+	platform = models.ManyToManyField(
+		Platform,
+		through='AppPlatformList',
+		through_fields=('app', 'platform'),
+		)
 	version = models.CharField(max_length=40)
 	partNumber = models.CharField(max_length=15)
 	pricePerMonth = models.FloatField()
@@ -22,6 +33,7 @@ class Application(models.Model):
 	applicationFile = models.FileField(upload_to=app_directory_path)
 	created = models.DateTimeField(auto_now_add=True)
 	number_of_downloads = models.PositiveIntegerField(default=0)
+	developer = models.CharField(max_length=100)
 	valid_device_models = models.ManyToManyField(
 		DeviceModel,
 		through='AppModelList',
@@ -57,3 +69,7 @@ class Review(models.Model):
 class AppModelList(models.Model):
 	app = models.ForeignKey(Application)
 	device_model = models.ForeignKey(DeviceModel)
+
+class AppPlatformList(models.Model):
+	app = models.ForeignKey(Application)
+	platform = models.ForeignKey(Platform)
