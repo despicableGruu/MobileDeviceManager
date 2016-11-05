@@ -13,7 +13,7 @@
         <th><input type="checkbox" class="select-all-checkbox" value="-1" id="-1"  data-true-val="true" data-false-val="false"></th>
       </tr>
     </thead>
-    <tbody id = "sortable">
+    <tbody>
     {% for device in device_list %}
       <tr class="device-row {% if not device.heartbeat %} danger {% endif %}">
         <td>{{device.androidId}}</td>
