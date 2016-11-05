@@ -1,0 +1,36 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover" id="application-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Version</th>
+        <th>Part Number</th>
+        <th>Price</th>
+        <th>Created On</th>
+        <th>Number of Downloads</th>
+        <th>Developer</th>
+        <th><input type="checkbox" class="select-all-checkbox" value="-1" id="-1"  data-true-val="true" data-false-val="false"></th>
+      </tr>
+    </thead>
+    <tbody id = "sortable">
+    {% for application in app_list %}
+      <tr>
+        <td>{{application.icon}}</td>
+        <td>{{application.name}}</td>
+        <td>{{application.version}}</td>
+        <td>{{application.partNumber}}</td>
+        <td>{{application.pricePerMonth}}</td>
+        <td>{{application.created}}</td>
+        <td>{{application.number_of_downloads}}</td>
+        <td>{{application.developer}}</td>
+        <td><input type="checkbox" class="select-checkbox" id="{{application.id}}" data-true-val="true" data-false-val="false"></td>
+      </tr>      
+    {% endfor %}
+    </tbody>
+  </table>
+  {% if not app_list %}
+    <p class="text-center">No applications yet!</p>
+  {% endif %}
+
+</div>
