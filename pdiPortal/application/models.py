@@ -14,8 +14,12 @@ class Platform(models.Model):
 	name = models.CharField(max_length=25)
 	icon = models.ImageField(upload_to=platform_path)
 
+	def __str__(self):
+  		return self.name
+
 class Application(models.Model):
-	"""docstring for Application"""
+	"""Database table that stores all of the information
+	for an application hosted on our store."""
 	name = models.CharField(max_length=50)
 	title = models.CharField(max_length=50)
 	platform = models.ManyToManyField(
@@ -26,6 +30,7 @@ class Application(models.Model):
 	version = models.CharField(max_length=40)
 	partNumber = models.CharField(max_length=15)
 	pricePerMonth = models.FloatField()
+	msrp = models.FloatField()
 	description = models.TextField()
 	recent_updates = models.TextField(null=True)
 	icon = models.ImageField(upload_to=app_directory_path)
@@ -45,13 +50,11 @@ class Application(models.Model):
 		return self.name
 
 class Screenshot(models.Model):
-	"""docstring for Screenshot"""
+	"""Table to hold all of the screenshots for 
+	the applications in our store."""
 	
 	application = models.ForeignKey(Application)
 	image = models.ImageField(upload_to=app_directory_path)
-
-	def __str__():
-		return self.name
 
 class Video(models.Model):
 	application = models.ForeignKey(Application)
