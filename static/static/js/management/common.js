@@ -8,14 +8,6 @@ $(".select-all-checkbox").click(function(){
     });
 });
 
-$( function() {
-    $( "#sortable" ).sortable();
-    $( "#sortable" ).disableSelection();
-} );
-
-$( function() {
-    $( "#main-table" ).tablesorter();
-} );
 
 function spawnBasicNotification(theBody, theIcon, theTitle){
     var options = {
