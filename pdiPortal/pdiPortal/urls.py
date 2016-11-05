@@ -37,6 +37,8 @@ urlpatterns = [
     url(r'^create/facilityadmin/$', facility_views.create_facility_admin, name='create-admin'),
     url(r'^reports/$', management_views.reports, name='reports'),
     url(r'^store/$', store_views.store, name='store'),
-    url(r'^store/app/(?P<name>\w+)/$', store_views.appPage, name='appPage'),
+    url(r'^store/apps/$', store_views.app_list, name='applications'),
+    url(r'^store/app/(?P<name>\w+)/$', store_views.app_page, name='appPage'),
     url(r'^publisher/$', publisher_views.publisher, name='publisher'),
+    url(r'^publisher/createApp/$', publisher_views.create_application, name="create-app")
 ]
