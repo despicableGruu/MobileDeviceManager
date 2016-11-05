@@ -23,7 +23,7 @@ from publisher import views as publisher_views
 from facility import views as facility_views
 
 urlpatterns = [
-	url(r'^$', management_views.home, name='home'),
+	url(r'^$', store_views.store, name='home'),
     url(r'^contact/$', contact_views.contact, name='contact'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/password/change/$', management_views.dashboard_after_password_change, name='account_change_password'),
@@ -32,8 +32,9 @@ urlpatterns = [
 	url(r'^dashboard/$', management_views.dashboard, name='dashboard'),
     url(r'^device-list/$', management_views.devices, name='device-list'),
     url(r'^device/(?P<androidId>\w+)/$', device_views.device, name='device'),
+    url(r'^register/device/$', device_views.register_device, name="register-device"),
     url(r'^users/$', management_views.users, name='users'),
-    url(r'^create/facilityadmin/$', facility_views.create, name='create-admin'),
+    url(r'^create/facilityadmin/$', facility_views.create_facility_admin, name='create-admin'),
     url(r'^reports/$', management_views.reports, name='reports'),
     url(r'^store/$', store_views.store, name='store'),
     url(r'^store/app/(?P<name>\w+)/$', store_views.appPage, name='appPage'),
