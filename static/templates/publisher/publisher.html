@@ -3,7 +3,10 @@
 {% block data %}
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header">Publisher</h1>
-  {% include "publisher/application_table.html" %}
+  <a href="{% url 'create-app'%}"<button class="btn btn-default" id="create-app">Create App</button></a>
+  <div>
+    {% include "publisher/application_table.html" %}
+  </div>
 </div>
 
 {% endblock %}
