@@ -8,16 +8,22 @@ def store(request):
 	user = request.user
 	application_list = Application.objects.all()
 	context = {'user': user, 'application_list': application_list}
-	template = 'store/store.html'
+	template = 'store/store_home.html'
 	return render(request, template, context)
 
-@login_required
-def appPage(request, app_name):
+def app_page(request, app_id):
 	user = request.user
 	try:
-		appName = Application.get(name = app_name)
-	except App.DoesNotExist:
+		app = Application.get(_id = app_id)
+	except Application.DoesNotExist:
 		raise Http404("App does not exist.")
 	context = {'user': user, 'app': appName}
 	template = 'mobileApp.html'
+	return render(request, template, context)
+
+def app_list(request):
+	user = request.user
+	application_list = Application.objects.all()
+	context = {'user': user, 'application_list': application_list}
+	template = 'store/application_list.html'
 	return render(request, template, context)
