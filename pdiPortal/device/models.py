@@ -8,14 +8,14 @@ DEFAULT_FACILITY_ID = 1
 
 # Create your models here.
 class DeviceModel(models.Model):
-	"""docstring for Model"""	
+	"""A class that holds all of the device models"""	
 	device_model = models.CharField(max_length=40)
 
 	def __str__(self):
 		return self.device_model
 
 class Device(models.Model):
-	"""docstring for Device"""
+	"""A class that stores all of the data about a device in the database."""
 	name = models.CharField(max_length=100, default='Android Device')
 	androidId = models.CharField(max_length=25)
 	buildNumber = models.CharField(max_length=25)
@@ -29,6 +29,7 @@ class Device(models.Model):
 		return self.name
 
 class downloadedApp(models.Model):
+	"""A class that stores the downloaded applications to a device."""
 	application = models.ForeignKey('application.Application', on_delete=models.CASCADE)
 	device = models.ForeignKey(Device, on_delete=models.CASCADE)
 	downloadedDate=models.DateTimeField(auto_now_add=True)
@@ -40,6 +41,6 @@ class downloadedApp(models.Model):
 
 		
 class operation(object):
-	"""docstring for operation"""
+	"""A class for that stores the operations applied to a device."""
 	
 		
