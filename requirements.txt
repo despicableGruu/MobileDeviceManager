@@ -1,5 +1,5 @@
 defusedxml==0.4.1
-Django==1.10.4
+Django==1.10.5
 django-allauth==0.27.0
 django-crispy-forms==1.6.0
 django-generic-positions==0.2.2
