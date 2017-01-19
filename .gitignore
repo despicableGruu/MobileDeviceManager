@@ -4,4 +4,7 @@ include/
 bin/
 pip-selfcheck.json
 .vscode/
-
+Include/
+Lib/
+Scripts/
+tcl/
