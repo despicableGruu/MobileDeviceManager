@@ -8,7 +8,7 @@ def publisher(request):
 	user = request.user
 	context = {'user': user}
 	template = 'publisher/publisher.html'
-	if user.user.is_publisher or user.is_superuser:
+	if user.is_publisher or user.is_superuser:
 		return render(request, template, context)
 	else:
 		return redirect('dashboard')
@@ -16,7 +16,7 @@ def publisher(request):
 @login_required
 def create_application(request):
 	user = request.user
-	if user.user.is_publisher or user.is_superuser:
+	if user.is_publisher or user.is_superuser:
 		app_form = CreateApplicationForm()
 		context = {'user': user, 'appForm': app_form}
 		template = 'publisher/create_application.html'
