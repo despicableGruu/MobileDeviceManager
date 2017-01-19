@@ -1,3 +1,13 @@
-h1{
-    color: green;
+.offlineDevice{
+	color: red;
+}
+
+.header-button {
+  margin: 0px 8px;
+}
+
+.user-row a{
+  display:block;
+  text-decoration:none;
+  text-align: center;
 }

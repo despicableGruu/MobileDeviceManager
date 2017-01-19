@@ -1,3 +1,14 @@
 .offlineDevice{
 	color: red;
 }
+
+.header-button {
+  margin: 0px 8px;
+}
+
+.user-row a{
+  padding: 8px;
+  display:block;
+  text-decoration:none;
+  text-align: center;
+}

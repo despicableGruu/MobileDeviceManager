@@ -17,4 +17,3 @@ function spawnBasicNotification(theBody, theIcon, theTitle){
     var n = new Notification(theTitle, options);
     setTimeout(n.close.bind(n), 5000);
 }
-
