@@ -1,0 +1,7 @@
+static/static-only/
+lib/
+include/
+bin/
+pip-selfcheck.json
+.vscode/
+
