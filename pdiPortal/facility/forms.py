@@ -1,20 +1,16 @@
-from django.forms import ModelForm, PasswordInput
-from .models import facility, user
-from django.contrib.auth.models import User, Group
+from django.forms import ModelForm, PasswordInput, CharField, EmailInput
+from .models import facility, PortalUser
+from django.contrib.auth.models import Group
 
-class BasicUserForm(ModelForm):
+class UserForm(ModelForm):
 	"""Form to create a general user."""
+	email = CharField(label="Email", widget=EmailInput, required=True)
+	password1 = CharField(label="Password", widget=PasswordInput, required=True)
+	password2 = CharField(label="Repeat Password", widget=PasswordInput, required=True)
 
 	class Meta:
-		model = User
-		fields = ['username','first_name','last_name','email']
-
-class CustomUserForm(ModelForm):
-	"""Form that create the custom user fields for this application"""
-
-	class Meta:
-		model = user
-		fields = ['is_publisher']
+		model = PortalUser
+		fields = ['username','first_name','last_name',]
 
 class FacilityForm(ModelForm):
 	"""Form that defines facility creation """
