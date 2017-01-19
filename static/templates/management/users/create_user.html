@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<p><a href="{% url 'users' %}">&lt Users</a></p>
+<h1>Create User</h1>
+
+<form action="{% url 'create-user' %}" method="post">
+    {% csrf_token %}
+    {{ defaultForm|crispy }}
+    <input class="btn btn-default" type="submit" value="Create" />
+</form>
+{% endblock %}

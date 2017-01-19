@@ -1,0 +1,14 @@
+{% extends "management/management.html" %}
+
+{% block data %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h1 class="page-header">
+    Users<a href="{% url 'create-user' %}" class="btn btn-primary pull-right header-button">Create User</a>
+    {% if user.is_superuser %}
+      <a href="{% url 'create-admin' %}" class="btn btn-primary pull-right header-button">Create Facility Admin</a>
+    {% endif %}
+    </h1>
+  {% include "management/users/user_table.html" %}
+</div>
+
+{% endblock %}

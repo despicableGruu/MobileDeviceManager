@@ -1,0 +1,40 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover" id="user-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Facility</th>
+        <th>Number of Devices</th>
+        <th>Devices Offline</th>
+        <th>Groups</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for user in user_list %}
+      <tr class="user-row">
+        <td>{{user.username}}</td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.email}}</td>
+        <td>
+          {% for eachFacility in user.facility.all %}
+            {{eachFacility}} 
+          {% endfor %}
+        </td>
+        <td style="padding: 0px"><a href="{% url 'device-list-for-user' user.username %}">{{user.number_of_devices}}</a></td>
+        <td style="padding: 0px"><a href="{% url 'device-list-for-user' user.username %}">{{user.devices_offline}}</a></td>
+        <td>{% for group in user.group %}
+        {{group}}, 
+        {% endfor %}</td>
+      </tr>      
+    {% endfor %}
+    </tbody>
+  </table>
+  {% if not user_list %}
+    <p class="text-center">No users yet!</p>
+  {% endif %}
+
+</div>
