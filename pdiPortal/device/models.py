@@ -1,8 +1,7 @@
 from django.db import models
 from datetime import date
 from django.utils import timezone
-from django.contrib.auth.models import User
-from facility.models import facility
+from facility.models import facility, PortalUser
 
 DEFAULT_FACILITY_ID = 1
 
@@ -20,7 +19,7 @@ class Device(models.Model):
 	androidId = models.CharField(max_length=25)
 	buildNumber = models.CharField(max_length=25)
 	osVersion = models.CharField(max_length=25)
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(PortalUser)
 	facility = models.ForeignKey(facility, default = DEFAULT_FACILITY_ID)
 	device_model = models.ForeignKey(DeviceModel)
 	heartbeat = models.BooleanField(default=False)

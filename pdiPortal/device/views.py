@@ -11,7 +11,7 @@ def device(request):
 		'user': user,
 		'device': device
 	}
-	template = 'device.html'
+	template = 'management/devices/device.html'
 	return render(request, template, context)
 	
 @login_required
