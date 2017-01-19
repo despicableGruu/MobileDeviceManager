@@ -4,7 +4,7 @@ def app_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'user_{0}/{1}'.format(instance.name, instance.version)
 
-class ApplicationForm(models.Model):
+class ApplicationForm(form.Form):
 	"""docstring for ApplicationForm"""
 	name = forms.CharField(max_length=256)
 	operatingSystem = forms.CharField(max_length=40,default='Android')
@@ -14,7 +14,7 @@ class ApplicationForm(models.Model):
 	description = forms.TextField(null=True)
 	icon = forms.ImageField(upload_to=app_directory_path)
 	banner = forms.ImageField(upload_to=app_directory_path)
-	screenshot = forms.ImageField(upload_to=app_directory_path)
+	screenshot = forms.ImageField(upload_to=app_directory_path, widget=forms.ClearableFileInput(attrs={'multiple': True}))
 	applicationFile = forms.FileField(upload_to=app_directory_path)
 	created = forms.DateTimeField(auto_now_add=True)
 
