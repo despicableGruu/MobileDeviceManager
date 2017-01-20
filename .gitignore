@@ -8,3 +8,4 @@ Include/
 Lib/
 Scripts/
 tcl/
+pdiPortal/**/__pycache__/
