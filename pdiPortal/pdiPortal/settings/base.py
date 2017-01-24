@@ -15,7 +15,7 @@ import json
 
 from django.core.exceptions import ImproperlyConfigured
 
-with open("secrets.json") as f:
+with open("pdiportal/settings/secrets.json") as f:
   secrets = json.loads(f.read())
 
 def get_secret(setting, secrets=secrets):
@@ -27,23 +27,13 @@ def get_secret(setting, secrets=secrets):
     raise ImproperlyConfigured(error_msg)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-EMAIL_HOST = 'email-smtp.us-west-2.amazonaws.com'
-EMAIL_HOST_USER = 'AKIAJGZNCJ5UR4LAPD6Q'
-EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = 'pdistore@pdiarm.com'
-EMAIL_PORT = '587'
-EMAIL_USE_TLS = True
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_secret("SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -117,25 +107,7 @@ AUTHENTICATION_BACKENDS = (
 WSGI_APPLICATION = 'pdiPortal.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASE_USER = get_secret("DATABASE_USER")
-DATABASE_PASSWORD = get_secret("DATABASE_PASSWORD")
-DATABASE_HOST = get_secret("DATABASE_HOST")
-DATABASE_PORT = get_secret("DATABASE_PORT")
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'PORTAL_DB',
-        'USER': DATABASE_USER,
-        'PASSWORD': DATABASE_PASSWORD,
-        'HOST': DATABASE_HOST,
-        'PORT': DATABASE_PORT,
-    }
-    
-}
 
 
 # Password validation
@@ -170,18 +142,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-
-STATIC_URL = '/static/'
-
-if DEBUG:
-    MEDIA_URL = '/media/'
-    STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
-    MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "media")
-    STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR), "static", "static"),)
- 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
