@@ -11,21 +11,13 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-def facilities_match(user, requested_user):
-	user_facilities = user.facility.all()
-	requested_user_facilities = requested_user.facility.all()
+def facilities_match(user_facilities, requested_user_facilities):
 	for user_facility in user_facilities:
 		if(user_facility in requested_user_facilities):
 			return True
-
 	return False
 
 # Create your views here.
-def home(request):
-	context = {}
-	template = 'home.html'
-	return render(request, template, context)
-
 @login_required
 def dashboard(request):
 	user = request.user
@@ -124,7 +116,7 @@ class users(View):
 def user_configuration(request, username):
 	user = request.user
 	requested_user = PortalUser.objects.filter(username=username)[0]
-	if facilities_match(user, requested_user) or user.is_superuser:
+	if facilities_match(user.facility.all(), requested_user.facility.all()) or user.is_superuser:
 		context = {'user': user, 'requested_user': requested_user}
 		template = 'management/users/configuration.html'
 		return render(request, template, context)
