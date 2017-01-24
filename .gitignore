@@ -9,3 +9,4 @@ Lib/
 Scripts/
 tcl/
 pdiPortal/**/__pycache__/
+pdiPortal/pdiPortal/settings/secrets.json
