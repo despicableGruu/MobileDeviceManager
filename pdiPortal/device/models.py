@@ -1,7 +1,8 @@
 from django.db import models
 from datetime import date
 from django.utils import timezone
-from facility.models import facility, PortalUser
+from facility.models import facility
+from profiles.models import PortalUser
 
 DEFAULT_FACILITY_ID = 1
 

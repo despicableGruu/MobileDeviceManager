@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'management',
     'application',
     'device',
+    'profiles',
     'facility',
     'store',
     'publisher',
@@ -178,4 +179,4 @@ ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = False
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION  = True
 
-AUTH_USER_MODEL = "facility.PortalUser"
+AUTH_USER_MODEL = "profiles.PortalUser"
