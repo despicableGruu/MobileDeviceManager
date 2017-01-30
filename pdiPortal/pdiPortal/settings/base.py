@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     # The Django sites framework is required
     'django.contrib.sites',
     'management',
-    'application',
     'device',
     'profiles',
     'facility',

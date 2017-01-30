@@ -12,7 +12,6 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('application', '0001_initial'),
     ]
 
     operations = [
@@ -40,7 +39,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('downloadedDate', models.DateTimeField(auto_now_add=True)),
                 ('renewalDate', models.DateField(default=django.utils.timezone.now)),
-                ('application', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='application.Application')),
                 ('device', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='device.Device')),
             ],
         ),

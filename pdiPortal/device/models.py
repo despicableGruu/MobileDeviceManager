@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import date
-from django.utils import timezone
 from facility.models import facility
 from profiles.models import PortalUser
 
@@ -24,17 +23,6 @@ class Device(models.Model):
 	facility = models.ForeignKey(facility, default = DEFAULT_FACILITY_ID)
 	device_model = models.ForeignKey(DeviceModel)
 	heartbeat = models.BooleanField(default=False)
-
-	def __str__(self):
-		return self.name
-
-class downloadedApp(models.Model):
-	"""A class that stores the downloaded applications to a device."""
-	application = models.ForeignKey('application.Application', on_delete=models.CASCADE)
-	device = models.ForeignKey(Device, on_delete=models.CASCADE)
-	downloadedDate=models.DateTimeField(auto_now_add=True)
-	renewalDate = models.DateField(default=timezone.now)
-
 
 	def __str__(self):
 		return self.name

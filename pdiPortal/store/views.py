@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from application.models import Application
+from publisher.models import Application
 
 # Create your views here.
 def store(request):
