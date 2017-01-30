@@ -16,15 +16,15 @@ import json
 from django.core.exceptions import ImproperlyConfigured
 
 with open("pdiportal/settings/secrets.json") as f:
-  secrets = json.loads(f.read())
+    SECRETS = json.loads(f.read())
 
-def get_secret(setting, secrets=secrets):
-  """Get the secret variable or return explicit exception."""
-  try:
-    return secrets[setting]
-  except KeyError:
-    error_msg = "Set the {0} environment variable".format(setting)
-    raise ImproperlyConfigured(error_msg)
+def get_secret(setting, values=SECRETS):
+    """Get the secret variable or return explicit exception."""
+    try:
+        return values[setting]
+    except KeyError:
+        error_msg = "Set the {0} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -155,7 +155,7 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = LOGIN_URL
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
 
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS  = 1
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "Message from the PDi-PORTAL Admin"
@@ -176,6 +176,6 @@ ACCOUNT_USERNAME_BLACKLIST = []
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = False
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
-ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION  = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
 AUTH_USER_MODEL = "profiles.PortalUser"
