@@ -1,5 +1,5 @@
 from django.forms import ModelForm, ClearableFileInput, ImageField
-from application.models import Application
+from .models import Application
 
 
 class CreateApplicationForm(ModelForm):
