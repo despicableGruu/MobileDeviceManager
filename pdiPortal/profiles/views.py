@@ -49,7 +49,7 @@ class Users(View):
             user_item.number_of_devices = self.number_of_devices(user_item)
             user_item.devices_offline = self.number_of_devices_offline(user_item)
         context = {'user': user, 'user_list': user_list}
-        template = 'management/users/users.html'
+        template = 'users/users.html'
         return render(request, template, context)
 
 @login_required
@@ -59,7 +59,7 @@ def user_configuration(request, username):
     requested_user = PortalUser.objects.filter(username=username)[0]
     if facilities_match(user.facility.all(), requested_user.facility.all()) or user.is_superuser:
         context = {'user': user, 'requested_user': requested_user}
-        template = 'management/users/configuration.html'
+        template = 'users/configuration.html'
         return render(request, template, context)
     else:
         return redirect('dashboard')
@@ -94,11 +94,13 @@ class CreateFacilityAdmin(View):
         default_form = UserForm()
         facility_form = FacilityForm()
         context = {'defaultForm': default_form, 'facilityForm': facility_form}
-        template = 'management/users/create_facility_admin.html'
+        template = 'users/create_facility_admin.html'
         return render(request, template, context)
 
 @method_decorator(login_required, name='dispatch')
-@method_decorator(user_passes_test(lambda u: u.is_superuser or u.is_facility_administrator, redirect_field_name='dashboard'), name='dispatch')
+@method_decorator(user_passes_test(
+    lambda u: u.is_superuser or u.is_facility_administrator, redirect_field_name='dashboard'
+    ), name='dispatch')
 class CreateUser(View):
     """View used to create a new user by a facility administrator"""
 
@@ -125,5 +127,14 @@ class CreateUser(View):
         """ TODO: Docstring """
         default_form = UserForm()
         context = {'defaultForm': default_form}
-        template = 'management/users/create_user.html'
+        template = 'users/create_user.html'
         return render(request, template, context)
+
+
+@login_required
+def policies(request):
+    """ TODO: Docstring"""
+    user = request.user
+    context = {'user': user}
+    template = 'users/policies.html'
+    return render(request, template, context)

@@ -10,7 +10,6 @@
         <th>OS Version</th>
         <th>Build Date</th>
         <th>Status</th>
-        <th><input type="checkbox" class="select-all-checkbox" value="-1" id="-1"  data-true-val="true" data-false-val="false"></th>
       </tr>
     </thead>
     <tbody>
@@ -24,7 +23,6 @@
         <td>{{device.osVersion}}</td>
         <td>{{device.buildNumber}}</td>
         <td>{% if device.heartbeat %}Active{% else %}<em class="offlineDevice">Offline</em>{% endif %}</td>
-        <td><input type="checkbox" class="select-checkbox" id="{{device.androidId}}" data-true-val="true" data-false-val="false"></td>
       </tr>      
     {% endfor %}
     </tbody>
