@@ -1,4 +1,5 @@
 from django.forms import ModelForm, PasswordInput, CharField, EmailInput
+from django.contrib.auth.models import Group
 from .models import PortalUser
 
 class UserForm(ModelForm):
@@ -10,3 +11,10 @@ class UserForm(ModelForm):
     class Meta:
         model = PortalUser
         fields = ['username', 'first_name', 'last_name', ]
+
+class GroupForm(ModelForm):
+    """Form that allows users to create a new group"""
+
+    class Meta:
+        model = Group
+        fields = "__all__"
