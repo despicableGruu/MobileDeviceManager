@@ -6,12 +6,12 @@ from device.models import Device, DeviceModel
 
 def app_directory_path(instance, filename):
     """TODO: Docstring"""
-    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'upload/{0}/{1}'.format(instance.name, instance.version)
+    return 'upload/{0}/{1}/{2}'.format(instance.name, instance.version, filename)
 
-def platform_path(instance):
+
+def platform_path(instance, filename):
     """TODO: Docstring"""
-    return 'upload/{0}'.format(instance.name)
+    return 'upload/{0}/{1}'.format(instance.name, filename)
 
 class Platform(models.Model):
     """TODO: Docstring"""
@@ -56,13 +56,16 @@ class Screenshot(models.Model):
     """Table to hold all of the screenshots for
     the applications in our store."""
 
+    title = models.CharField(max_length=40, blank=True)
     application = models.ForeignKey(Application)
     image = models.ImageField(upload_to=app_directory_path)
 
 class Video(models.Model):
     """TODO: Docstring"""
+    title = models.CharField(max_length=40, blank=True)
     application = models.ForeignKey(Application)
     video = models.FileField(upload_to=app_directory_path)
+    summary = models.TextField()
 
 class Review(models.Model):
     """TODO: Docstring"""
