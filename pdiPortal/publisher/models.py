@@ -36,7 +36,7 @@ class Application(models.Model):
     pricePerMonth = models.FloatField()
     msrp = models.FloatField()
     description = models.TextField()
-    recent_updates = models.TextField(null=True)
+    recent_updates = models.TextField(blank=True)
     icon = models.ImageField(upload_to=app_directory_path)
     banner = models.ImageField(upload_to=app_directory_path)
     applicationFile = models.FileField(upload_to=app_directory_path)
@@ -66,9 +66,9 @@ class Video(models.Model):
 
 class Review(models.Model):
     """TODO: Docstring"""
-    title = models.CharField(max_length=25)
-    body = models.TextField(max_length=1000)
-    rating = models.PositiveIntegerField(null=True)
+    title = models.CharField(max_length=25, blank=True)
+    body = models.TextField(max_length=1000, blank=True)
+    rating = models.PositiveIntegerField()
     app = models.ForeignKey(Application)
 
     def __str__(self):
