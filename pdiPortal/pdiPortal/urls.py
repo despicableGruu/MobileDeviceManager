@@ -21,6 +21,7 @@ from device import views as device_views
 from profiles import views as profile_views
 from contact import views as contact_views
 from publisher import views as publisher_views
+from reports import views as report_views
 
 urlpatterns = [
     url(r'^$', store_views.store, name='home'),
@@ -38,7 +39,7 @@ urlpatterns = [
     url(r'^users/(?P<username>\w+)/$', profile_views.user_configuration, name="user-configuration"),
     url(r'^create/facilityadmin/$', profile_views.CreateFacilityAdmin.as_view(), name='create-admin'),
     url(r'^create/user/$', profile_views.CreateUser.as_view(), name='create-user'),
-    url(r'^reports/$', management_views.reports, name='reports'),
+    url(r'^reports/$', report_views.reports, name='reports'),
     url(r'^store/$', store_views.store, name='store'),
     url(r'^store/apps/$', store_views.app_list, name='applications'),
     url(r'^store/app/(?P<name>\w+)/$', store_views.app_page, name='appPage'),

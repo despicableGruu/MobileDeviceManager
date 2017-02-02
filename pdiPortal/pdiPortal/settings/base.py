@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'facility',
     'store',
     'publisher',
+    'reports',
     'allauth',
     'allauth.account',
     'crispy_forms',

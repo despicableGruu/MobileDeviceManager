@@ -26,13 +26,7 @@ def dashboard(request):
     template = 'management/dashboard.html'
     return render(request, template, context)
 
-@login_required
-def reports(request):
-    """ Reports Docstring """
-    user = request.user
-    context = {'user': user}
-    template = 'management/reports.html'
-    return render(request, template, context)
+
 
 @method_decorator(login_required, name='dispatch')
 class CustomPasswordChange(PasswordChangeView):
