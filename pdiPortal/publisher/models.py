@@ -25,7 +25,7 @@ class Application(models.Model):
     """Database table that stores all of the information
     for an application hosted on our store."""
     name = models.CharField(max_length=50)
-    title = models.CharField(max_length=50)
+    application_title = models.CharField(max_length=50)
     platform = models.ManyToManyField(
         Platform,
         through='AppPlatformList',
@@ -56,26 +56,26 @@ class Screenshot(models.Model):
     """Table to hold all of the screenshots for
     the applications in our store."""
 
-    title = models.CharField(max_length=40, blank=True)
+    screenshot_title = models.CharField(max_length=40, blank=True)
     application = models.ForeignKey(Application)
     image = models.ImageField(upload_to=app_directory_path)
 
 class Video(models.Model):
     """TODO: Docstring"""
-    title = models.CharField(max_length=40, blank=True)
+    video_title = models.CharField(max_length=40, blank=True)
     application = models.ForeignKey(Application)
     video = models.FileField(upload_to=app_directory_path)
     summary = models.TextField()
 
 class Review(models.Model):
     """TODO: Docstring"""
-    title = models.CharField(max_length=25, blank=True)
+    review_title = models.CharField(max_length=25, blank=True)
     body = models.TextField(max_length=1000, blank=True)
     rating = models.PositiveIntegerField()
     app = models.ForeignKey(Application)
 
     def __str__(self):
-        return self.title
+        return self.review_title
 
 class DownloadedApp(models.Model):
     """A class that stores the downloaded applications to a device."""
