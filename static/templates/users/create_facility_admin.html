@@ -1,17 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'management/management.html' %}
 
 {% load crispy_forms_tags %}
 
-{% block content %}
-<p><a href="{% url 'users' %}">&lt Users</a></p>
-<h1>Create Facility Admin</h1>
+{% block data %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <p><a href="{% url 'users' %}">&lt Users</a></p>
+    <h1>Create Facility Admin</h1>
 
-<form action="{% url 'create-admin' %}" method="post">
-    {% csrf_token %}
-    {{ defaultForm|crispy }}
-    
-    <h2>Facility</h2>
-    {{ facilityForm|crispy }}
-    <input class="btn btn-default" type="submit" value="Create" />
-</form>
+    <form action="{% url 'create-admin' %}" method="post">
+        {% csrf_token %}
+        {{ defaultForm|crispy }}
+        
+        <h2>Facility</h2>
+        {{ facilityForm|crispy }}
+        <input class="btn btn-default" type="submit" value="Create" />
+    </form>
+</div>
 {% endblock %}

@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/password/change/$', management_views.CustomPasswordChange.as_view(), name='account_change_password'),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^device/', include('device.urls')),
+    url(r'^devices/', include('device.urls')),
     url(r'^users/', include('profiles.urls')),
     url(r'^store/', include('store.urls')),
     #url(r'^review/', include('review.urls')),
