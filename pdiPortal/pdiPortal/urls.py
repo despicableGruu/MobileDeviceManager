@@ -24,7 +24,11 @@ urlpatterns = [
     url(r'^$', store_views.store, name='home'),
     url(r'^contact/$', contact_views.contact, name='contact'),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/password/change/$', management_views.CustomPasswordChange.as_view(), name='account_change_password'),
+    url(
+        r'^accounts/password/change/$',
+        management_views.CustomPasswordChange.as_view(),
+        name='account_change_password'
+    ),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^devices/', include('device.urls')),
     url(r'^users/', include('profiles.urls')),
