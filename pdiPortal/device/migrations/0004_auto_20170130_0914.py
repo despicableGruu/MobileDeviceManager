@@ -14,10 +14,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RemoveField(
             model_name='downloadedapp',
-            name='application',
-        ),
-        migrations.RemoveField(
-            model_name='downloadedapp',
             name='device',
         ),
         migrations.DeleteModel(
