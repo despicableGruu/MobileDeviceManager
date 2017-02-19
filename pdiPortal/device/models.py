@@ -15,9 +15,9 @@ class DeviceModel(models.Model):
 class Device(models.Model):
     """A class that stores all of the data about a device in the database."""
     name = models.CharField(max_length=100, default='Android Device')
-    androidId = models.CharField(max_length=25)
-    buildNumber = models.CharField(max_length=25)
-    osVersion = models.CharField(max_length=25)
+    android_id = models.CharField(max_length=25)
+    build_number = models.CharField(max_length=25)
+    operating_system_version = models.CharField(max_length=25)
     user = models.ForeignKey(PortalUser)
     facility = models.ForeignKey(Facility, default=DEFAULT_FACILITY_ID)
     device_model = models.ForeignKey(DeviceModel)

@@ -43,37 +43,49 @@
 		  <ul class="nav nav-sidebar">
 		  	{% url 'dashboard' as dashboard %}
 		  	{% url 'device-list' as deviceList %}
-        {% url 'users' as users %}
-        {% url 'reports' as reports %}
-        {% url 'publisher' as publisher %}
-		    <li {% if dashboard in request.path %} class=active {% endif %}><a href="{% url 'dashboard' %}">Overview 
-        {% if request.path == dashboard %}
-          <span class="sr-only">(current)</span>
-        {% endif %}</a></li>
-		    <li {% if deviceList in request.path %} class=active {% endif %}><a href="{% url 'device-list' %}">Devices 
-        {% if request.path == deviceList %}
-          <span class="sr-only">(current)</span>
-        {% endif %}</a></li>
-        {% if user.is_facility_administrator or user.is_superuser %}
-          <li {% if users in request.path %} class=active {% endif %}><a href="{% url 'users' %}">Users 
-          {% if request.path == users %}
-            <span class="sr-only">(current)</span>
-          {% endif %}</a></li>
-          <li {% if reports in request.path %} class=active {% endif %}><a href="{% url 'reports' %}">Reports 
-          {% if request.path == reports %}
-            <span class="sr-only">(current)</span>
-          {% endif %}</a></li>
-        {% endif %}
+            {% url 'users' as users %}
+            {% url 'reports' as reports %}
+            {% url 'publisher' as publisher %}
+		    <li {% if dashboard in request.path %} class=active {% endif %}>
+                <a href="{% url 'dashboard' %}">Overview 
+                {% if request.path == dashboard %}
+                    <span class="sr-only">(current)</span>
+                {% endif %}
+                </a>
+            </li>
+		    <li {% if deviceList in request.path %} class=active {% endif %}>
+                <a href="{% url 'device-list' %}">Devices 
+                {% if request.path == deviceList %}
+                    <span class="sr-only">(current)</span>
+                {% endif %}
+                </a>
+            </li>
+            {% if user.is_facility_administrator or user.is_superuser %}
+            <li {% if users in request.path %} class=active {% endif %}>
+                <a href="{% url 'users' %}">Users 
+                {% if request.path == users %}
+                    <span class="sr-only">(current)</span>
+                {% endif %}
+                </a>
+            </li>
+            <li {% if reports in request.path %} class=active {% endif %}>
+                <a href="{% url 'reports' %}">Reports 
+                {% if request.path == reports %}
+                    <span class="sr-only">(current)</span>
+                {% endif %}
+                </a>
+            </li>
+            {% endif %}
 		  </ul>
 		  <ul class="nav nav-sidebar">
-		    <li><a href="{% url 'store' %}">PDi-Store</a></li>
+		    <li><a href="{% url 'home' %}">PDi-Store</a></li>
 		  </ul>
       {% if user.is_publisher or user.is_superuser %}
       <ul class="nav nav-sidebar">
         <li {% if publisher in request.path %} class=active {% endif %}><a href="{% url 'publisher' %}">Publisher</a></li>
       </ul>
       {% endif %}
-		</div>
+	</div>
 		{% block data %}
 		{% endblock %}
 	</div>
