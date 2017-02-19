@@ -16,7 +16,7 @@ from .serializers import DeviceSerializer
 # Create your views here.
 @login_required
 def devices(request):
-    """ TODO: Docstring """
+    """ This returns all of the devices that the requesting user is permitted to see. """
     user = request.user
     device_list = get_device_list(user)
     context = {'user': user, 'device_list': device_list}
@@ -25,16 +25,18 @@ def devices(request):
 
 @method_decorator(login_required, name='dispatch')
 class DevicesForUser(View):
-    """ TODO: Docstring """
+    """ Class that returns the devices for a given user. """
     def get(self, request, username):
-        """ TODO: Docstring """
+        """ This returns the devices associated with a specific user. """
         user = request.user
         requested_username = username
         if user.is_superuser:
             # if PortalUser.objects.filter(username=requested_username).count() == 0:
             #     return redirect('device-list')
             requested_user = PortalUser.objects.filter(username=requested_username)[0]
-            device_list = Device.objects.filter(user=requested_user).order_by("androidId").order_by("heartbeat")
+            device_list = Device.objects.filter(
+                user=requested_user
+                ).order_by("androidId").order_by("heartbeat")
             if requested_user.first_name:
                 requested_username = requested_user.first_name
         elif user.is_facility_administrator:
@@ -44,7 +46,9 @@ class DevicesForUser(View):
             facilities = user.facility.all()
             device_list = []
             for one_facility in facilities:
-                device_objects = Device.objects.filter(facility=one_facility).order_by("androidId").order_by("heartbeat")
+                device_objects = Device.objects.filter(
+                    facility=one_facility
+                    ).order_by("androidId").order_by("heartbeat")
                 for single_device in device_objects:
                     device_list.append(single_device)
             if requested_user.first_name:
@@ -59,7 +63,7 @@ class DevicesForUser(View):
 
 @login_required
 def device(request):
-    """ TODO: Docstring """
+    """ This is a view that will show the information for the specific device requested. """
     user = request.user
     requested_device = request.deviceId
     context = {
@@ -70,13 +74,15 @@ def device(request):
     return render(request, template, context)
 
 class DeviceCreateReadView(ListCreateAPIView):
-    """ TODO: Docstring """
+    """ This is part of the Device API where you can create new devices
+    or return all of the devices. """
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
     lookup_field = 'android_id'
 
 
 class DeviceReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
+    """This is part of the API where you can Update, Read, or Delete a specific device."""
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
     lookup_field = 'android_id'
