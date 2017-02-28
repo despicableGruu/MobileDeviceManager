@@ -1,34 +1,34 @@
 <div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover" id="device-table">
-    <thead>
-      <tr>
-        <th>Android ID</th>
-        <th>Device Name</th>
-        <th>Username</th>
-        <th>Facility</th>
-        <th>Device Model</th>
-        <th>OS Version</th>
-        <th>Build Date</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for device in device_list %}
-      <tr class="device-row {% if not device.heartbeat %} danger {% endif %}">
-        <td>{{device.androidId}}</td>
-        <td>{{device.name}}</td>
-        <td>{{device.user.username}}</td>
-        <td>{{device.facility.name}}</td>
-        <td>{{device.device_model}}</td>
-        <td>{{device.osVersion}}</td>
-        <td>{{device.buildNumber}}</td>
-        <td>{% if device.heartbeat %}Active{% else %}<em class="offlineDevice">Offline</em>{% endif %}</td>
-      </tr>      
-    {% endfor %}
-    </tbody>
-  </table>
-  {% if not device_list %}
+    <table class="table table-striped table-bordered table-hover" id="device-table">
+        <thead>
+            <tr>
+                <th>Android ID</th>
+                <th>Device Name</th>
+                <th>Username</th>
+                <th>Facility</th>
+                <th>Device Model</th>
+                <th>OS Version</th>
+                <th>Build Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for device in device_list %}
+            <tr class="device-row {% if not device.heartbeat %} danger {% endif %}">
+                <td>{{device.android_id}}</td>
+                <td>{{device.name}}</td>
+                <td>{{device.user.username}}</td>
+                <td>{{device.facility.name}}</td>
+                <td>{{device.device_model}}</td>
+                <td>{{device.operating_system_version}}</td>
+                <td>{{device.build_number}}</td>
+                <td>{% if device.heartbeat %}Active{% else %}<em class="offlineDevice">Offline</em>{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if not device_list %}
     <p class="text-center">No devices yet!</p>
-  {% endif %}
+    {% endif %}
 
 </div>
