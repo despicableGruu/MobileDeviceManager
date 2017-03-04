@@ -9,16 +9,7 @@ from facility.forms import FacilityForm
 
 from .models import PortalUser
 from .forms import UserForm
-from .utils import facilities_match
-
-
-
-def validate_password(password1, password2):
-    """Validates that two passwords are the same."""
-    if password1 == password2:
-        return True
-    else:
-        return False
+from .utils import facilities_match, validate_password, get_user_list
 
 # Create your views here.
 @method_decorator(login_required, name='dispatch')
@@ -36,15 +27,7 @@ class Users(View):
     def get(self, request):
         """ TODO: Docstring """
         user = request.user
-        user_list = []
-        if user.is_superuser:
-            user_list = PortalUser.objects.all()
-        elif user.is_facility_administrator:
-            facilities = user.facility.all()
-            for one_facility in facilities:
-                user_objects = PortalUser.objects.filter(facility=one_facility)
-                for user_item in user_objects:
-                    user_list.append(user_item)
+        user_list = get_user_list(user)
         for user_item in user_list:
             user_item.number_of_devices = self.number_of_devices(user_item)
             user_item.devices_offline = self.number_of_devices_offline(user_item)

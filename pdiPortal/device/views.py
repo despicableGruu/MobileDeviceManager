@@ -76,6 +76,13 @@ def device(request):
 class DeviceCreateReadView(ListCreateAPIView):
     """ This is part of the Device API where you can create new devices
     or return all of the devices. """
+    def perform_create(self, serializer):
+        serializer.save(
+            user=self.request.user,
+            facility=self.request.user.facility,
+            device_model=self.request.device_model
+        )
+
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
     lookup_field = 'android_id'
