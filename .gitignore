@@ -1,11 +1,35 @@
-static/static-only/
-lib/
-include/
-bin/
+
+# Created by https://www.gitignore.io/api/django,virtualenv,visualstudiocode
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media
+
+### VirtualEnv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
 pip-selfcheck.json
-Include/
-Lib/
-Scripts/
-tcl/
-pdiPortal/**/__pycache__/
 pdiPortal/pdiPortal/settings/secrets.json
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# End of https://www.gitignore.io/api/django,virtualenv,visualstudiocode
