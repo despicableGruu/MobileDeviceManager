@@ -9,7 +9,7 @@ DEFAULT_FACILITY_ID = 1
 class DeviceModel(models.Model):
     """A class that holds all of the device models. This class is a useful reference
     for each defice, and for applications that may only work on certain devices"""
-    device_model = models.CharField(max_length=40)
+    device_model = models.CharField(max_length=40, primary_key=True, null=False, blank=False)
 
     def __str__(self):
         return self.device_model
@@ -17,19 +17,22 @@ class DeviceModel(models.Model):
 class Device(models.Model):
     """A class that stores all of the data about a device in the database."""
     name = models.CharField(max_length=100, default='Android Device')
-    android_id = models.CharField(max_length=25)
+    android_id = models.CharField(max_length=25, primary_key=True)
     build_number = models.CharField(max_length=25)
     operating_system_version = models.CharField(max_length=25)
     user = models.ForeignKey(PortalUser)
-    facility = models.ForeignKey(Facility, default=DEFAULT_FACILITY_ID)
-    model = models.ForeignKey(DeviceModel)
+    model = models.CharField(max_length=40, null=False, blank=False)
     heartbeat = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
 
+class DeviceFacilityList(models.Model):
+    """A list to keep track of the facilities that devices are associated with."""
+    device = models.ForeignKey(Device)
+    facility = models.ForeignKey(Facility)
+
 
 class Operation(object):
     """A class for that stores the operations applied to a device."""
 
-		

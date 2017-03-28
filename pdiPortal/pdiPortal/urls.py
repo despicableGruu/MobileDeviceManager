@@ -30,7 +30,7 @@ urlpatterns = [
         name='account_change_password'
     ),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^devices/', include('device.urls')),
+    url(r'^', include('device.urls')),
     url(r'^users/', include('profiles.urls')),
     url(r'^store/', include('store.urls')),
     #url(r'^review/', include('review.urls')),

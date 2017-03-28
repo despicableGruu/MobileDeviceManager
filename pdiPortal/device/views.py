@@ -5,11 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 
-from rest_framework.generics import ListCreateAPIView
-from rest_framework.generics import RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework import permissions
 from profiles.models import PortalUser
 
-from .utils import get_device_list
+from .utils import get_device_list, check_device_model_exists, create_device_facility_records, update_device_facility_records
 from .models import Device
 from .serializers import DeviceSerializer
 
@@ -77,19 +77,28 @@ class DeviceCreateReadView(ListCreateAPIView):
     """ This is part of the Device API where you can create new devices
     or return all of the devices. """
     def perform_create(self, serializer):
-        serializer.save(
-            user=self.request.user,
-            facility=self.request.user.facility,
-            device_model=self.request.device_model
+        check_device_model_exists(self.request.data['model'])
+        device_instance = serializer.save(
+            user=self.request.user
         )
+        create_device_facility_records(device_instance, self.request.user)
 
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     lookup_field = 'android_id'
 
 
 class DeviceReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     """This is part of the API where you can Update, Read, or Delete a specific device."""
+
+    def perform_update(self, serializer):
+         device = Device.object.get(android_id=self.request.data['android_id'])
+         temp_user = device.user
+         if self.request.user != temp_user:
+             update_device_facility_records(device, self.request.user)
+
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     lookup_field = 'android_id'
