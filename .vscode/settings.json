@@ -2,5 +2,28 @@
 {
     "editor.formatOnPaste": true,
     "editor.minimap.enabled": true,
-    "editor.snippetSuggestions": "top"
+    "editor.snippetSuggestions": "top",
+    "files.exclude": {
+      "Lib/": false,
+      "Scripts/": false,
+      "tcl/": false,
+      "Include/": false,
+      ".vscode/": false,
+      "**/static-only/": false,
+      "*/application/__pycache__/": false,
+      "*/application/migrations/": false,
+      "*/contact/__pycache__/": false,
+      "*/contact/migrations/": false,
+      "*/device/__pycache__/": false,
+      "*/device/migrations/": false,
+      "*/facility/__pycache__/": false,
+      "*/facility/migrations/": false,
+      "*/management/__pycache__/": false,
+      "*/management/migrations/": false,
+      "*/pdiPortal/__pycache__/": false,
+      "*/publisher/__pycache__/": false,
+      "*/publisher/migrations/": false,
+      "*/store/__pycache__/": false,
+      "*/store/migrations/": false
+    }
 }
