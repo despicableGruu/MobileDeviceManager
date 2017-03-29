@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'user_media',
     'generic_positions',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [

@@ -3,6 +3,7 @@
     "editor.formatOnPaste": true,
     "editor.minimap.enabled": true,
     "editor.snippetSuggestions": "top",
+    "editor.tabSize": 4,
     "files.exclude": {
       "Lib/": false,
       "Scripts/": false,
