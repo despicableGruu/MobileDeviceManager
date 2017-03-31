@@ -40,7 +40,7 @@ def user_configuration(request, username):
     """ TODO: Docstring """
     user = request.user
     requested_user = PortalUser.objects.filter(username=username)[0]
-    if facilities_match(user.facility.all(), requested_user.facility.all()) or user.is_superuser:
+    if facilities_match(user.facility, requested_user.facility) or user.is_superuser:
         context = {'user': user, 'requested_user': requested_user}
         template = 'users/configuration.html'
         return render(request, template, context)
@@ -100,9 +100,7 @@ class CreateUser(View):
             facility_user.email = request.POST['email']
             facility_user.set_password(request.POST['password1'])
             facility_user.save()
-            creator_facilities = user.facility.all()
-            for creator_facility in creator_facilities:
-                facility_user.facility.add(creator_facility)
+            facility_user.facility.add(user.facility)
             # TODO: send a verification email to the user to create their account.
             return redirect('dashboard')
 

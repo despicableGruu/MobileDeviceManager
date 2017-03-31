@@ -18,8 +18,8 @@
                 <td>{{device.android_id}}</td>
                 <td>{{device.name}}</td>
                 <td>{{device.user.username}}</td>
-                <td>{{device.facility.name}}</td>
-                <td>{{device.device_model}}</td>
+                <td>{{device.facility}}</td>
+                <td>{{device.model}}</td>
                 <td>{{device.operating_system_version}}</td>
                 <td>{{device.build_number}}</td>
                 <td>{% if device.heartbeat %}Active{% else %}<em class="offlineDevice">Offline</em>{% endif %}</td>

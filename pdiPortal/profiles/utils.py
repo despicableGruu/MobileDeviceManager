@@ -16,13 +16,10 @@ def validate_password(password1, password2):
         return False
 
 def get_user_list(user):
+    """This function returns a list of users based on profile."""
     user_list = []
     if user.is_superuser:
-            user_list = PortalUser.objects.all()
+        user_list = PortalUser.objects.all()
     elif user.is_facility_administrator:
-        facilities = user.facility.all()
-        for one_facility in facilities:
-            user_objects = PortalUser.objects.filter(facility=one_facility)
-            for user_item in user_objects:
-                user_list.append(user_item)
+        user_list = PortalUser.objects.filter(facility=user.facility)
     return user_list

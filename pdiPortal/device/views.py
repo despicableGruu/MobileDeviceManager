@@ -1,15 +1,27 @@
-import json
+"""
+This is where the views for the device app are contained.
+It has views to list device and get a selected device. It
+also has an API for Device and Device Model CRUD.
+"""
 
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View
 from django.utils.decorators import method_decorator
+from django.core.exceptions import ObjectDoesNotExist
+
 
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import permissions
-from profiles.models import PortalUser
 
-from .utils import get_device_list, check_device_model_exists, create_device_facility_records, update_device_facility_records
+from profiles.models import PortalUser
+from device.utils import get_device_list
+
+from .utils import (
+    get_device_list,
+    check_device_model_exists,
+)
 from .models import Device
 from .serializers import DeviceSerializer
 
@@ -31,30 +43,33 @@ class DevicesForUser(View):
         user = request.user
         requested_username = username
         if user.is_superuser:
-            # if PortalUser.objects.filter(username=requested_username).count() == 0:
-            #     return redirect('device-list')
-            requested_user = PortalUser.objects.filter(username=requested_username)[0]
+            try:
+                requested_user = PortalUser.objects.get(
+                    username=requested_username
+                ).get()
+            except ObjectDoesNotExist:
+                messages.error(request, "The user does not exist.")
+                redirect('device_list')
             device_list = Device.objects.filter(
                 user=requested_user
                 ).order_by("androidId").order_by("heartbeat")
-            if requested_user.first_name:
-                requested_username = requested_user.first_name
         elif user.is_facility_administrator:
-            if PortalUser.objects.filter(username=requested_username).count() == 0:
-                return redirect('device-list')
-            requested_user = PortalUser.objects.filter(username=requested_username)[0]
-            facilities = user.facility.all()
-            device_list = []
-            for one_facility in facilities:
-                device_objects = Device.objects.filter(
-                    facility=one_facility
-                    ).order_by("androidId").order_by("heartbeat")
-                for single_device in device_objects:
-                    device_list.append(single_device)
-            if requested_user.first_name:
-                requested_username = requested_user.first_name
+            try:
+                requested_user = PortalUser.objects.get(
+                    username=requested_username,
+                    facility=user.facility
+                    ).get()
+            except ObjectDoesNotExist:
+                redirect('device_list')
+            device_list = Device.objects.filter(
+                user=requested_user,
+                ).order_by("androidId").order_by("heartbeat")
         else:
             return redirect('dashboard')
+
+        if requested_user.first_name:
+            requested_username = requested_user.first_name
+
         context = {'user': user,
                    'device_list': device_list,
                    'requested_username': requested_username}
@@ -62,7 +77,7 @@ class DevicesForUser(View):
         return render(request, template, context)
 
 @login_required
-def device(request):
+def get_device(request):
     """ This is a view that will show the information for the specific device requested. """
     user = request.user
     requested_device = request.deviceId
@@ -79,9 +94,9 @@ class DeviceCreateReadView(ListCreateAPIView):
     def perform_create(self, serializer):
         check_device_model_exists(self.request.data['model'])
         device_instance = serializer.save(
-            user=self.request.user
+            user=self.request.user,
+            facility=self.request.user.facility
         )
-        create_device_facility_records(device_instance, self.request.user)
 
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
@@ -91,12 +106,6 @@ class DeviceCreateReadView(ListCreateAPIView):
 
 class DeviceReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     """This is part of the API where you can Update, Read, or Delete a specific device."""
-
-    def perform_update(self, serializer):
-         device = Device.object.get(android_id=self.request.data['android_id'])
-         temp_user = device.user
-         if self.request.user != temp_user:
-             update_device_facility_records(device, self.request.user)
 
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer

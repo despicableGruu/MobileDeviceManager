@@ -1,4 +1,4 @@
-from .models import Device, DeviceModel, DeviceFacilityList
+from .models import Device, DeviceModel
 
 
 def get_device_list(user):
@@ -8,13 +8,9 @@ def get_device_list(user):
     if user.is_superuser:
         device_list = Device.objects.all().order_by("androidId").order_by("heartbeat")
     elif user.is_facility_administrator:
-        facilities = user.facility.all()
-        for one_facility in facilities:
-            device_objects = Device.objects.filter(
-                facility=one_facility
-                ).order_by("androidId").order_by("heartbeat")
-            for single_device in device_objects:
-                device_list.append(single_device)
+        device_list = Device.objects.filter(
+            facility=user.facility
+            ).order_by("androidId").order_by("heartbeat")
     else:
         device_list = Device.objects.filter(user=user).order_by("androidId").order_by("heartbeat")
 
@@ -27,15 +23,3 @@ def check_device_model_exists(model):
     """
     DeviceModel.objects.get_or_create(device_model=model)
 
-def create_device_facility_records(device, user):
-    """This function will create the initial entries in the DeviceFacilityList"""
-    for single_facility in user.facility.all():
-        DeviceFacilityList.objects.create(device=device, facility=single_facility)
-
-def update_device_facility_records(device, user):
-    """
-    This function will remove all the rows associated with
-    the device and update them to the latest user.
-    """
-    DeviceFacilityList.objects.filter(device=device).delete()
-    create_device_facility_records(device, user)
