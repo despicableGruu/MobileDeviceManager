@@ -6,13 +6,13 @@ def get_device_list(user):
      devices associated with that user"""
     device_list = []
     if user.is_superuser:
-        device_list = Device.objects.all().order_by("androidId").order_by("heartbeat")
+        device_list = Device.objects.all().order_by("androidId").order_by("modified")
     elif user.is_facility_administrator:
         device_list = Device.objects.filter(
             facility=user.facility
-            ).order_by("androidId").order_by("heartbeat")
+        ).order_by("androidId").order_by("modified")
     else:
-        device_list = Device.objects.filter(user=user).order_by("androidId").order_by("heartbeat")
+        device_list = Device.objects.filter(user=user).order_by("androidId").order_by("modified")
 
     return device_list
 

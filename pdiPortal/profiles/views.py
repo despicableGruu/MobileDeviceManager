@@ -1,8 +1,13 @@
+"""
+The views for the Profile appliation
+"""
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required, user_passes_test
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import View
+from django.utils import timezone
 
 from device.models import Device
 from facility.forms import FacilityForm
@@ -22,7 +27,8 @@ class Users(View):
 
     def number_of_devices_offline(self, user):
         """TODO: Docstring"""
-        return Device.objects.filter(user=user, heartbeat=False).count()
+        offline_time = timezone.now() - timezone.timedelta(minutes=30)
+        return Device.objects.filter(user=user, modified__lt=offline_time).count()
 
     def get(self, request):
         """ TODO: Docstring """

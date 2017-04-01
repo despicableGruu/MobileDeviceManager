@@ -44,15 +44,14 @@ class DevicesForUser(View):
         requested_username = username
         if user.is_superuser:
             try:
-                requested_user = PortalUser.objects.get(
+                requested_user = PortalUser.objects.filter(
                     username=requested_username
                 ).get()
             except ObjectDoesNotExist:
-                messages.error(request, "The user does not exist.")
-                redirect('device_list')
+                return redirect('device-list')
             device_list = Device.objects.filter(
                 user=requested_user
-                ).order_by("androidId").order_by("heartbeat")
+            ).order_by("androidId").order_by("modified")
         elif user.is_facility_administrator:
             try:
                 requested_user = PortalUser.objects.get(
@@ -60,10 +59,10 @@ class DevicesForUser(View):
                     facility=user.facility
                     ).get()
             except ObjectDoesNotExist:
-                redirect('device_list')
+                return redirect('device-list')
             device_list = Device.objects.filter(
                 user=requested_user,
-                ).order_by("androidId").order_by("heartbeat")
+            ).order_by("androidId").order_by("modified")
         else:
             return redirect('dashboard')
 
