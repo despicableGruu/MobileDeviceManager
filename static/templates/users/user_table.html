@@ -19,11 +19,7 @@
         <td>{{user.first_name}}</td>
         <td>{{user.last_name}}</td>
         <td>{{user.email}}</td>
-        <td>
-          {% for eachFacility in user.facility.all %}
-            {{eachFacility}} 
-          {% endfor %}
-        </td>
+        <td>{{user.facility}}</td>
         <td style="padding: 0px"><a href="{% url 'device-list-for-user' user.username %}">{{user.number_of_devices}}</a></td>
         <td style="padding: 0px"><a href="{% url 'device-list-for-user' user.username %}">{{user.devices_offline}}</a></td>
         <td>{% for group in user.group %}
