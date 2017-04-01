@@ -10,4 +10,4 @@ class CreateApplicationForm(ModelForm):
 
     class Meta:
         model = Application
-        fields = '__all__'
+        exclude = ['number_of_downloads']
