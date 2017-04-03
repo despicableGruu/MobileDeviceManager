@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+
+from core.models import TimeStampedModel
 from device.models import Device, DeviceModel
 
 # Create your models here.
@@ -21,7 +23,7 @@ class Platform(models.Model):
     def __str__(self):
         return self.name
 
-class Application(models.Model):
+class Application(TimeStampedModel):
     """Database table that stores all of the information
     for an application hosted on our store."""
     name = models.CharField(max_length=50)
@@ -40,7 +42,6 @@ class Application(models.Model):
     icon = models.ImageField(upload_to=app_directory_path)
     banner = models.ImageField(upload_to=app_directory_path)
     applicationFile = models.FileField(upload_to=app_directory_path)
-    created = models.DateTimeField(auto_now_add=True)
     number_of_downloads = models.PositiveIntegerField(default=0)
     developer = models.CharField(max_length=100)
     valid_device_models = models.ManyToManyField(
