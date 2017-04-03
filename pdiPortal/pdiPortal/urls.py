@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+
+from rest_framework.authtoken import views
+
 from management import views as management_views
 from store import views as store_views
 from contact import views as contact_views
@@ -37,4 +40,5 @@ urlpatterns = [
     url(r'^dashboard/$', management_views.dashboard, name='dashboard'),
     url(r'^reports/$', report_views.reports, name='reports'),
     url(r'^publisher/', include('publisher.urls')),
+    url(r'^api-token-auth/', views.obtain_auth_token),
 ]
