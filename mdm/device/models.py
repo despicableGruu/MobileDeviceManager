@@ -9,7 +9,7 @@ from facility.models import Facility
 from profiles.models import PortalUser
 
 
-# The default facility will always be PDi
+# The default facility will always be admin facility
 DEFAULT_FACILITY_ID = 1
 
 # Create your models here.

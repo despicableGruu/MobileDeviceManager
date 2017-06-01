@@ -7,14 +7,14 @@ from .forms import ContactForm
 # Create your views here.
 def contact(request):
     """ TODO: Docstring """
-    title = 'Contact PDi-PORTAL Admin'
+    title = 'Contact Admin'
     form = ContactForm(request.POST or None)
     confirm_message = None
 
     if form.is_valid():
         comment = form.cleaned_data['comment']
         name = form.cleaned_data['name']
-        subject = 'Message from PDi-PORTAL'
+        subject = 'Message from admin'
         message = '%s\n\n%s' %(comment, name)
         email_from = form.cleaned_data['email']
         email_to = [settings.DEFAULT_FROM_EMAIL]

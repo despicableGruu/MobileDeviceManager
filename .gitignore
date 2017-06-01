@@ -50,4 +50,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-pdiPortal/pdiPortal/settings/secrets.json
+mdm/mdm/settings/secrets.json

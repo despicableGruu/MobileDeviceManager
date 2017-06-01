@@ -1,2 +1,2 @@
-# PDi Portal
-This is a second shot at the PDi-PORTAL using Django as the web framework.
+# Mobile Device Manager
+This is a mobile device management website initially for Android devices..

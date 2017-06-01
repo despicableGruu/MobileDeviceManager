@@ -1,5 +1,5 @@
 """
-WSGI config for pdiPortal project.
+WSGI config for the MDM project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

@@ -4,9 +4,9 @@ from .base import *
 DEBUG = True
 
 EMAIL_HOST = 'email-smtp.us-west-2.amazonaws.com'
-EMAIL_HOST_USER = 'AKIAJGZNCJ5UR4LAPD6Q'
+EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = 'pdistore@pdiarm.com'
+DEFAULT_FROM_EMAIL = 'brianmuse33@gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 
@@ -20,7 +20,7 @@ DATABASE_PORT = get_secret("DATABASE_PORT")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'PORTAL_DB',
+        'NAME': 'MDM_DB',
         'USER': DATABASE_USER,
         'PASSWORD': DATABASE_PASSWORD,
         'HOST': 'localhost',
