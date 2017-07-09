@@ -1,2 +1,3 @@
-# Mobile Device Manager
-This is a mobile device management website initially for Android devices..
+##  Nexus Control
+
+A web application designed to oversee and administer mobile devices, with a primary focus on Android operating systems. 
